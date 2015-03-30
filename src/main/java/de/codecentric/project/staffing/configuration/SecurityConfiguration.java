@@ -9,10 +9,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -23,16 +23,23 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
 @Configuration
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER) 
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
-    @Value("${server.contextPath}")
-    private String contextPath;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll().anyRequest().authenticated().and().csrf()
-                        .csrfTokenRepository(csrfTokenRepository()).and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+        http.httpBasic().and()
+            .authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll().anyRequest().authenticated().and().csrf()
+            .csrfTokenRepository(csrfTokenRepository()).and()
+            .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+            .withUser("admin").password("password").roles("USER", "ADMIN").and()
+            .withUser("user").password("password").roles("USER").and()
+            .withUser("guest").password("guest").roles("USER");
     }
 
     private Filter csrfHeaderFilter() {
@@ -45,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     String token = csrf.getToken();
                     if (cookie == null || token != null && !token.equals(cookie.getValue())) {
                         cookie = new Cookie("XSRF-TOKEN", token);
-                        cookie.setPath(contextPath);
+                        cookie.setPath("/");
                         response.addCookie(cookie);
                     }
                 }

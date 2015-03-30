@@ -28,7 +28,7 @@
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-			<li ng-show="!authenticated"><a href="#/login">login</a></li>
+			<li><a href="#/login">login</a></li>
 			<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
@@ -38,6 +38,7 @@
 	<div ng-view class="container"></div>
 
 	<script src="js/angular-bootstrap.js" type="text/javascript"></script>
-	<script src="js/app.js"></script>
+	<script src="js/modules.js"></script>
+
 </body>
 </html>
