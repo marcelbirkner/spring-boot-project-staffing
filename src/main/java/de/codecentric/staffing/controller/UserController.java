@@ -1,4 +1,4 @@
-package de.codecentric.project.staffing.controller;
+package de.codecentric.staffing.controller;
 
 import java.security.Principal;
 

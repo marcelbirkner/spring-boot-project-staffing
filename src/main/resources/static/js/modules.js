@@ -7,16 +7,19 @@
 
 		$routeProvider.when('/', {
 			templateUrl: 'home.html',
-			controller: 'home'
+			controller: 'homeCtrl'
 		}).when('/login', {
 			templateUrl: 'login.html',
-			controller: 'navigation'
+		}).when('/employees', {
+			templateUrl: 'employees.html',
+			controller: 'employeeCtrl',
+		    controllerAs: 'ctrl'
 		}).otherwise('/');
 
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	});
 
-	module.controller('navigation', function($rootScope, $scope, $http, $location, $route) {
+	module.controller('navigationCtrl', function($rootScope, $scope, $http, $location, $route) {
 
 		$scope.tab = function(route) {
 			return $route.current && route === $route.current.controller;
@@ -77,10 +80,48 @@
 
 	});
 
-	module.controller('home', function($scope, $http) {
-		$http.get('/resource/').success(function(data) {
+	module.controller('homeCtrl', function($scope, $http) {
+		$http.get('/api/resource').success(function(data) {
 			$scope.greeting = data;
 		});
+	});
+	
+	module.controller('employeeCtrl', function($scope, $http, $route, EmployeeService) {
+		var ctrl = this;
+		$http.get('/api/employees').success(function(data) {
+			$scope.employees = data;
+			ctrl.employees = data;
+		});
+		
+		ctrl.remove = function(employee) {
+			console.log('remove employee ' + employee.fullName);
+			EmployeeService.remove(employee.id)
+		      .then(function() {
+		        $route.reload();
+		      });
+	    };
+	});
+	
+	module.service('EmployeeService', function($http) {
+	    
+		this.getAll = function() {
+	      return $http.get('/api/employees')
+	      .then(function(response) {
+	    	console.log('getAll employees');
+	        return response.data;
+	      });
+	    };
+
+	    this.add = function(employee) {
+	      console.log('add employee');
+	      return $http.post('/api/employees', employee);
+	    };
+
+	    this.remove = function(id) {
+	      console.log('remove employee with id ' + id);
+	      return $http.delete('/api/employees/' + id);
+	    };
+	    
 	});
 
 })();

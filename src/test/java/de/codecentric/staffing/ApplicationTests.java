@@ -1,4 +1,4 @@
-package de.codecentric.project.staffing;
+package de.codecentric.staffing;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import de.codecentric.project.staffing.Application;
+import de.codecentric.staffing.Application;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)

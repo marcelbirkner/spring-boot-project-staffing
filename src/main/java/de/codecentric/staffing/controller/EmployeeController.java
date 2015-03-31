@@ -1,16 +1,19 @@
-package de.codecentric.project.staffing.controller;
+package de.codecentric.staffing.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.codecentric.project.staffing.model.Employee;
-import de.codecentric.project.staffing.model.Employee.EmployeeBuilder;
-import de.codecentric.project.staffing.model.Skill;
+import de.codecentric.staffing.model.Employee;
+import de.codecentric.staffing.model.Skill;
+import de.codecentric.staffing.model.Employee.EmployeeBuilder;
 
 @RestController
 public class EmployeeController {
@@ -33,9 +36,13 @@ public class EmployeeController {
         }
     }
     
-    @RequestMapping("/employees")
+    @RequestMapping(value = "/api/employees", method = RequestMethod.GET)
     public List<Employee> employees() {
         return employees;
+    }
+    
+    @RequestMapping(value = "/api/employees/{id}", method = RequestMethod.DELETE)
+    public void deleteEmployee(@PathVariable UUID id) {
     }
     
 }

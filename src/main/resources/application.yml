@@ -4,3 +4,6 @@ security:
 logging:
   level:
     org.springframework.security: DEBUG
+mongo:
+  url: mongodb://127.0.0.1:27017
+  db: staffing

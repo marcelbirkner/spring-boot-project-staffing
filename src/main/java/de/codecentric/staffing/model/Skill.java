@@ -1,4 +1,4 @@
-package de.codecentric.project.staffing.model;
+package de.codecentric.staffing.model;
 
 public class Skill {
     

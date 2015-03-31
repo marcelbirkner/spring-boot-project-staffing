@@ -1,11 +1,13 @@
-package de.codecentric.project.staffing.model;
+package de.codecentric.staffing.model;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Employee {
-
+    
+    private UUID id;
     private String fullName;
     private String email;
     private String office;
@@ -16,6 +18,7 @@ public class Employee {
     private LocalDate createdOn;
     
     public Employee(String fullName, String email, String office) {
+        this.id = UUID.randomUUID();
         this.fullName = fullName;
         this.email = email;
         this.office = office;
@@ -113,5 +116,7 @@ public class Employee {
     public void setGeoLocation(GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
     }
-    
+    public UUID getId() {
+        return id;
+    }
 }
