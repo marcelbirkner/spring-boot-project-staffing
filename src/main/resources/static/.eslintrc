@@ -15,3 +15,4 @@
     quotes: [2, 'single', 'avoid-escape']
     dot-notation: [2, {'allowKeywords': true}]
     no-console: [0]
+    no-underscore-dangle: [0]

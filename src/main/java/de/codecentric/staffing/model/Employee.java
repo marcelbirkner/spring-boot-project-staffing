@@ -1,13 +1,14 @@
 package de.codecentric.staffing.model;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
 
 public class Employee {
     
-    private UUID id;
+    @Id private String id;
+    
     private String fullName;
     private String email;
     private String office;
@@ -17,57 +18,6 @@ public class Employee {
     private GeoLocation geoLocation;
     private LocalDate createdOn;
     
-    public Employee(String fullName, String email, String office) {
-        this.id = UUID.randomUUID();
-        this.fullName = fullName;
-        this.email = email;
-        this.office = office;
-    }
-    
-    public static class EmployeeBuilder {
-
-        private String fullName;
-        private String email;
-        private String office;
-        private List<Skill> skills;
-        private List<Project> projects;
-        
-        public static EmployeeBuilder init() {
-            return new EmployeeBuilder();
-        }
-
-        public EmployeeBuilder fullName(String fullName) {
-            this.fullName = fullName;
-            return this;
-        }
-        public EmployeeBuilder email(String email) {
-            this.email = email;
-            return this;
-        }
-        public EmployeeBuilder office(String office) {
-            this.office = office;
-            return this;
-        }
-        public EmployeeBuilder skills(Skill... skills) {
-            this.skills = Arrays.asList(skills);
-            return this;
-        }
-        public EmployeeBuilder projects(Project... projects) {
-            this.projects = Arrays.asList(projects);
-            return this;
-        }
-
-        public Employee create() {
-            Employee emp = new Employee(fullName, email, office);
-            emp.setOffice(office);
-            emp.setSkills(skills);
-            emp.setProjects(projects);
-            emp.setCreatedOn(LocalDate.now());
-            return emp;
-        }
-
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -115,8 +65,5 @@ public class Employee {
     }
     public void setGeoLocation(GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
-    }
-    public UUID getId() {
-        return id;
     }
 }

@@ -7,3 +7,6 @@ logging:
 mongo:
   url: mongodb://127.0.0.1:27017
   db: staffing
+spring:
+  data:
+    rest.baseUri: /api
