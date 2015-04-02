@@ -1,26 +1,54 @@
-<form class="form-horizontal" role="form" name="form" ng-submit="form.$valid && ctrl.save()">
-  <div class="col-sm-offset-3 col-sm-9">
-    <h2>{{ctrl.heading}}</h2>
-  </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li><a href="#/employees">Overview</a></li>
+        <li class="active"><a href="#/addEmployee">Add Employee</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-  <div class="form-group">
-    <label for="inputTitle" class="col-sm-3 control-label"> Title </label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="inputTitle" name="movieTitle" ng-model="ctrl.movie.title" required> <span class="help-block"
-        ng-show="form.movieTitle.$error.required && form.$dirty"> You forgot the movie title! </span>
+      <form class="form-horizontal" role="form" name="form" ng-submit="form.$valid && ctrl.save()">
+
+        <div class="col-sm-offset-3 col-sm-9">
+          <h2>Add employee</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="inputTitle" class="col-sm-3 control-label">Full Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="fullName" name="fullName" ng-model="ctrl.newEmployee.fullName" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDescription" class="col-sm-3 control-label">Email</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="email" name="email" ng-model="ctrl.newEmployee.email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDescription" class="col-sm-3 control-label">Office</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="office" name="office" ng-model="ctrl.newEmployee.office" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="Autocomplete" class="col-sm-3 control-label">Address</label>
+          <div class="col-sm-9">
+            <input id="searchAddress" type="text" class="form-control" ng-model="ctrl.address" options="options" details="details" ng-autocomplete/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default" ng-disabled="!form.$valid">Save Employee</button>
+          </div>
+        </div>
+      </form>
+
     </div>
   </div>
-
-  <div class="form-group">
-    <label for="inputDescription" class="col-sm-3 control-label"> Description </label>
-    <div class="col-sm-9">
-      <textarea rows="3" class="form-control" ng-model="ctrl.movie.description" id="inputDescription"></textarea>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default" ng-disabled="!form.$valid">{{ctrl.buttonLabel}}</button>
-    </div>
-  </div>
-</form>
+</div>

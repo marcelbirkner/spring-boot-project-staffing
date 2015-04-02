@@ -1,10 +1,25 @@
+[ng\:cloak],[ng-cloak],.ng-cloak {
+	display: none !important;
+}
+
+.jumbotron {
+  padding: 30px;
+  margin-bottom: 30px;
+  background-image: url(/img/map.png);
+}
+
+.panel-default {
+  border-color: #ddd;
+  opacity: 0.9;
+}
+
 /*
  * Base structure
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
 

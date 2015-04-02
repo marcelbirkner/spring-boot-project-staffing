@@ -1,5 +1,7 @@
 package de.codecentric.staffing.model;
 
+import java.util.Date;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 
@@ -11,12 +13,14 @@ public class Customer {
     private String industry;
     private String address;
     private GeoLocation geoLocation;
+    private Date createdOn;
 
 	public Customer(String customerName, String industry, String address, GeoLocation geoLocation) {
         this.customerName = customerName;
         this.industry = industry;
         this.address = address;
         this.geoLocation = geoLocation;
+        this.setCreatedOn(new Date());
     }
     public String getCustomerName() {
         return customerName;
@@ -43,6 +47,12 @@ public class Customer {
         this.geoLocation = geoLocation;
     }
     
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

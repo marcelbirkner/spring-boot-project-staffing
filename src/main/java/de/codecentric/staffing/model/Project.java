@@ -1,13 +1,13 @@
 package de.codecentric.staffing.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Project {
 
     private String name;
     private String decription;
-    private LocalDate start;
-    private LocalDate end;
+    private Date start;
+    private Date end;
     
     public String getName() {
         return name;
@@ -21,16 +21,16 @@ public class Project {
     public void setDecription(String decription) {
         this.decription = decription;
     }
-    public LocalDate getStart() {
+    public Date getStart() {
         return start;
     }
-    public void setStart(LocalDate start) {
+    public void setStart(Date start) {
         this.start = start;
     }
-    public LocalDate getEnd() {
+    public Date getEnd() {
         return end;
     }
-    public void setEnd(LocalDate end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
     

@@ -20,7 +20,7 @@ import de.codecentric.staffing.Application;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
-public class ApplicationTests {
+public class SecurityConfigurationTests {
 
     @Value("${local.server.port}")
     private int port;

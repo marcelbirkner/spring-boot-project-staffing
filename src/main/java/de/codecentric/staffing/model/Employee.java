@@ -1,9 +1,11 @@
 package de.codecentric.staffing.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Employee {
     
@@ -16,13 +18,13 @@ public class Employee {
     private List<Skill> skills;
     private List<Project> projects;
     private GeoLocation geoLocation;
-    private LocalDate createdOn;
+    private Date createdOn;
     
-    public Employee(String fullName, String email, String office) {
+    public Employee(@JsonProperty("fullName") String fullName, @JsonProperty("email") String email, @JsonProperty("office") String office) {
         this.fullName = fullName;
         this.email = email;
         this.office = office;
-        this.createdOn = LocalDate.now();
+        this.createdOn = new Date();
     }
     
     public String getFullName() {
@@ -55,10 +57,10 @@ public class Employee {
     public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
-    public LocalDate getCreatedOn() {
+    public Date getCreatedOn() {
         return createdOn;
     }
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
     public String getAddress() {

@@ -68,28 +68,39 @@
     }
   ]);
 
-  module.controller('homeCtrl', ['$scope', '$http', function homeCtrl($scope, $http) {
-    $http.get('/api/resource').success(function(data) {
-      $scope.greeting = data;
-    });
-  }]);
-
-  module.controller('EmployeeCtrl', function EmployeeCtrl($scope, $http, $route, employees, EmployeeService) {
-
-	  var ctrl = this;
-	  ctrl.employees = employees;
-	  ctrl.heading = 'Employee Controller';
-	  ctrl.buttonLabel = 'Save Employee';
+  module.controller('EmployeeCtrl', ['$scope', '$http', '$route', 'employees',
+    'EmployeeService',
+    function EmployeeCtrl($scope, $http, $route, employees,
+      EmployeeService) {
 	  
-	  ctrl.save = function() {
-		  console.log('ctrl save');
-		  console.log('ctrl movie ' + ctrl.movie.title);
-//		  EmployeeService.add(ctrl.movie)
-//	      .then(function() {
-//	        $location.path(BASE_URL);
-//	      });
+      var ctrl = this;
+      ctrl.employees = employees;
+      ctrl.newEmployee = {};
+
+      $scope.result = '';
+      $scope.options = {};
+      $scope.details = {};
+      
+      $scope.form = {
+	    type : 'geocode',
+	    watchEnter : true
 	  };
-	  
+      
+      ctrl.save = function() {
+        console.log('save new employee ' + ctrl.newEmployee.fullName);
+        
+		var keys = Object.keys($scope.details.geometry.location);
+		ctrl.newEmployee.geoLocation = {};
+		ctrl.newEmployee.geoLocation.longitude = $scope.details.geometry.location[keys[0]];
+		ctrl.newEmployee.geoLocation.latitude = $scope.details.geometry.location[keys[1]];
+		console.log(JSON.stringify(ctrl.newEmployee));
+				
+		EmployeeService.add(ctrl.newEmployee)
+	      .then(function() {
+	    	$route.reload();
+	      });
+      };
+
       ctrl.remove = function(employee) {
         console.log('remove employee ' + employee.fullName);
         EmployeeService.remove(employee)
@@ -97,26 +108,28 @@
             $route.reload();
           });
       };
-  });
+    }
+  ]);
 
-  module.controller('CustomerCtrl', function CustomerCtrl($route, customer, CustomerService) {
-	  
-      var ctrl = this;
-      ctrl.customer = customer;
+  module.controller('CustomerCtrl', function CustomerCtrl($route, customer,
+    CustomerService) {
 
-      ctrl.addCustomer = function() {
-          console.log('add customer');
-      };
-        
-      ctrl.remove = function(cust) {
-        CustomerService.remove(cust).then(function() {
-          $route.reload();
-        });
-      };
+    var ctrl = this;
+    ctrl.customer = customer;
 
-      ctrl.resetCustomer = function() {
-        console.log('resetCustomer');
-      };
+    ctrl.save = function() {
+      console.log('add customer ' + ctrl.newCustomer.customerName);
+    };
+
+    ctrl.remove = function(cust) {
+      CustomerService.remove(cust).then(function() {
+        $route.reload();
+      });
+    };
+
+    ctrl.resetCustomer = function() {
+      console.log('resetCustomer');
+    };
   });
 
 })();

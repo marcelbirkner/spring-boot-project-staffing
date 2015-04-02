@@ -10,7 +10,7 @@
     brace-style: [2, '1tbs', { 'allowSingleLine': true }]
     complexity: [2, 10]
     strict: [2, 'function']
-    max-len: [2, 120, 4]
+    max-len: [2, 200, 4]
     no-use-before-define: [2, 'nofunc']
     quotes: [2, 'single', 'avoid-escape']
     dot-notation: [2, {'allowKeywords': true}]
