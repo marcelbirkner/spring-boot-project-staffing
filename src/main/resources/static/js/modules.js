@@ -30,6 +30,7 @@
 		}).when('/addCustomer', {
 			templateUrl: 'partials/addCustomer.html',
 			controller: 'CustomerCtrl',
+			controllerAs: 'ctrl',
 			resolve: {
 				customer: function(CustomerService) {
 					return CustomerService.getAll();

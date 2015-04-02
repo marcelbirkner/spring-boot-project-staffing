@@ -35,10 +35,10 @@ public class Application {
         GeoLocation geoLocation = new GeoLocation();
         geoLocation.setLongitude("50.936872");
         geoLocation.setLatitude("6.834235000000035");
-        this.customerRepository.save(new Customer("REWE", "Food", "Aachener Straße, Cologne, Germany", geoLocation));
-        this.customerRepository.save(new Customer("Provinzial", "Insurance", "Provinzialplatz, Duesseldorf, Germany", geoLocation));
+        this.customerRepository.save(new Customer("REWE", "Food", "Aachener Straße, Cologne, Germany"));
+        this.customerRepository.save(new Customer("Provinzial", "Insurance", "Provinzialplatz, Duesseldorf, Germany"));
         for (int i = 0; i < 10; i++) {
-            this.customerRepository.save(new Customer("Customer #" + i, "General", "Test Street " + i + ", Metropolis, Planet Earth", geoLocation));
+            this.customerRepository.save(new Customer("Customer #" + i, "General", "Test Street " + i + ", Metropolis, Planet Earth"));
             this.employeeRepository.save(new Employee("John Doe #" + i, i + "-john.doe@email.com", "Solingen"));
         }
 

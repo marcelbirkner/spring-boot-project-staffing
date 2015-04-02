@@ -76,7 +76,8 @@
       var ctrl = this;
       ctrl.employees = employees;
       ctrl.newEmployee = {};
-
+      
+      $scope.errorMessage = '';
       $scope.result = '';
       $scope.options = {};
       $scope.details = {};
@@ -89,12 +90,17 @@
       ctrl.save = function() {
         console.log('save new employee ' + ctrl.newEmployee.fullName);
         
+        if ( ! $scope.details.geometry ) {
+            $scope.errorMessage = 'Please check the address';
+            return;
+        }
+        
 		var keys = Object.keys($scope.details.geometry.location);
 		ctrl.newEmployee.geoLocation = {};
 		ctrl.newEmployee.geoLocation.longitude = $scope.details.geometry.location[keys[0]];
 		ctrl.newEmployee.geoLocation.latitude = $scope.details.geometry.location[keys[1]];
-		console.log(JSON.stringify(ctrl.newEmployee));
-				
+		ctrl.newEmployee.address = ctrl.address;
+		
 		EmployeeService.add(ctrl.newEmployee)
 	      .then(function() {
 	    	$route.reload();
@@ -111,15 +117,37 @@
     }
   ]);
 
-  module.controller('CustomerCtrl', function CustomerCtrl($route, customer,
-    CustomerService) {
+  module.controller('CustomerCtrl', ['$route', '$scope', 'customer', 'CustomerService', 
+                                     function CustomerCtrl($route, $scope, customer, CustomerService) {
 
     var ctrl = this;
     ctrl.customer = customer;
+    ctrl.newCustomer = {};
+    
+    $scope.errorMessage = '';
+    $scope.result = '';
+    $scope.options = {};
+    $scope.details = {};
 
     ctrl.save = function() {
-      console.log('add customer ' + ctrl.newCustomer.customerName);
-    };
+        console.log('save customer ' + ctrl.newCustomer.customerName);
+        
+        if ( ! $scope.details.geometry ) {
+            $scope.errorMessage = 'Please check the address';
+            return;
+        }
+        
+		var keys = Object.keys($scope.details.geometry.location);
+		ctrl.newCustomer.geoLocation = {};
+		ctrl.newCustomer.geoLocation.longitude = $scope.details.geometry.location[keys[0]];
+		ctrl.newCustomer.geoLocation.latitude = $scope.details.geometry.location[keys[1]];
+		ctrl.newCustomer.address = ctrl.address;
+		
+		CustomerService.add(ctrl.newCustomer)
+	      .then(function() {
+	    	$route.reload();
+	      });
+      };
 
     ctrl.remove = function(cust) {
       CustomerService.remove(cust).then(function() {
@@ -130,6 +158,6 @@
     ctrl.resetCustomer = function() {
       console.log('resetCustomer');
     };
-  });
+  }]);
 
 })();

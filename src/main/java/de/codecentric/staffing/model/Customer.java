@@ -5,6 +5,8 @@ import java.util.Date;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Customer {
 
 	@Id private String id;
@@ -15,11 +17,10 @@ public class Customer {
     private GeoLocation geoLocation;
     private Date createdOn;
 
-	public Customer(String customerName, String industry, String address, GeoLocation geoLocation) {
+	public Customer(@JsonProperty("customerName") String customerName, @JsonProperty("industry") String industry, @JsonProperty("address") String address) {
         this.customerName = customerName;
         this.industry = industry;
         this.address = address;
-        this.geoLocation = geoLocation;
         this.setCreatedOn(new Date());
     }
     public String getCustomerName() {

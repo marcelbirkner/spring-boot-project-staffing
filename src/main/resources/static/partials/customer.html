@@ -33,7 +33,9 @@
         </table>
       </div>
 
-      <p ng-hide="ctrl.customer">The Database is empty, sorry mate!</p>
+      <div ng-hide="ctrl.customer" class="alert alert-info">
+        <strong>Note! </strong>The Database is empty, sorry mate!
+      </div>
 
       <div ng-show="!authenticated">
         <p>Login to see all customer</p>

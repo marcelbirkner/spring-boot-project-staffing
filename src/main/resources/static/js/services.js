@@ -40,7 +40,7 @@
 		};
 
 		this.add = function(customer) {
-			console.log('add customer');
+			console.log('add customer ' + JSON.stringify(customer));
 			return $http.post('/api/customer', customer);
 		};
 
