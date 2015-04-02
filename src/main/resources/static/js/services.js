@@ -3,36 +3,37 @@
 
   var module = angular.module('staffing.services', []);
 
-  module.service('EmployeeService', function($http) {
+  module.service('EmployeeService', ['$http', function($http) {
 
-    this.getAll = function() {
-      return $http.get('/api/employees')
-        .then(function(response) {
-          console.log('getAll employees');
-          return response.data;
-        });
-    };
+	  this.getAll = function() {
+	      return $http.get('/api/employees')
+	        .then(function(response) {
+	          if (response.data['_embedded']) {
+	            console.log('getAll employees ' + response.data['_embedded'].employee.length);
+	            return response.data._embedded.employee;
+	          }
+	        });
+	    };
 
     this.add = function(employee) {
       console.log('add employee');
       return $http.post('/api/employees', employee);
     };
 
-    this.remove = function(id) {
-      console.log('remove employee with id ' + id);
-      return $http.delete('/api/employees/' + id);
-    };
+    this.remove = function(employee) {
+        console.log('remove employee ' + employee._links.self.href);
+        return $http.delete(employee._links.self.href);
+      };
 
-  });
+  }]);
 
-  module.service('CustomerService', function($http) {
+  module.service('CustomerService', ['$http', function($http) {
 
     this.getAll = function() {
       return $http.get('/api/customer')
         .then(function(response) {
-          if (response.data._embedded) {
-            console.log('getAll customer ' + response.data._embedded.customer
-              .length);
+          if (response.data['_embedded']) {
+            console.log('getAll customer ' + response.data['_embedded'].customer.length);
             return response.data._embedded.customer;
           }
         });
@@ -48,6 +49,6 @@
       return $http.delete(customer._links.self.href);
     };
 
-  });
+  }]);
 
 })();

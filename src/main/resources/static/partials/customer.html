@@ -1,0 +1,33 @@
+<h3>Customer</h3>
+
+<div ng-show="authenticated">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Industry</th>
+        <th>Address</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="c in ctrl.customer" ng-animate=" 'animate' ">
+        <td>{{c.customerName}}</td>
+        <td>{{c.industry}}</td>
+        <td>{{c.address}}</td>
+        <td><button id="deleteButton" ng-click="ctrl.remove(c)" class="btn btn-danger">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    <div class="row">
+      <a href="#/addCustomer" role="button" class="btn btn-primary btn-md" data-toggle="modal">Add Customer</a>
+    </div>
+  </div>
+</div>
+
+<p ng-hide="ctrl.customer">The Database is empty, sorry mate!</p>
+
+<div ng-show="!authenticated">
+  <p>Login to see all customer</p>
+</div>

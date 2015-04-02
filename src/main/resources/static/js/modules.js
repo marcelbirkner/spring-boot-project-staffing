@@ -6,17 +6,34 @@
   module.config(function($routeProvider, $httpProvider) {
 
     $routeProvider.when('/', {
-      templateUrl: 'home.html',
+      templateUrl: 'partials/home.html',
       controller: 'homeCtrl'
     }).when('/login', {
-      templateUrl: 'login.html'
+      templateUrl: 'partials/login.html'
     }).when('/employees', {
-      templateUrl: 'employees.html',
-      controller: 'employeeCtrl',
-      controllerAs: 'ctrl'
+      templateUrl: 'partials/employees.html',
+      controller: 'EmployeeCtrl',
+      controllerAs: 'ctrl',
+      resolve: {
+          employees: function(EmployeeService) {
+            return EmployeeService.getAll();
+          }
+        }
+    }).when('/addEmployee', {
+        templateUrl: 'partials/addEmployee.html',
+        controller: 'EmployeeCtrl',
+        controllerAs: 'ctrl'
+    }).when('/addCustomer', {
+        templateUrl: 'partials/addCustomer.html',
+        controller: 'CustomerCtrl',
+        resolve: {
+          customer: function(CustomerService) {
+            return CustomerService.getAll();
+          }
+        }
     }).when('/customer', {
-      templateUrl: 'customer.html',
-      controller: 'customerCtrl',
+      templateUrl: 'partials/customer.html',
+      controller: 'CustomerCtrl',
       controllerAs: 'ctrl',
       resolve: {
         customer: function(CustomerService) {
@@ -26,6 +43,7 @@
     }).otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  
   });
 
 })();

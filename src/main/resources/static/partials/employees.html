@@ -1,0 +1,32 @@
+<h3>Employees</h3>
+
+<div ng-show="authenticated">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Office</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="employee in ctrl.employees" ng-animate=" 'animate' ">
+        <td>{{employee.fullName}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.office}}</td>
+        <td><button id="deleteButton" ng-click="ctrl.remove(employee)" class="btn btn-danger">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    <div class="row">
+      <a href="#/addEmployee" role="button" class="btn btn-primary btn-md" data-toggle="modal">Add Employee</a>
+    </div>
+  </div>
+</div>
+<p ng-hide="ctrl.employees">The Database is empty, sorry mate!</p>
+
+<div ng-show="!authenticated">
+  <p>Login to see all employees</p>
+</div>

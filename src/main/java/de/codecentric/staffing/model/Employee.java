@@ -18,6 +18,13 @@ public class Employee {
     private GeoLocation geoLocation;
     private LocalDate createdOn;
     
+    public Employee(String fullName, String email, String office) {
+        this.fullName = fullName;
+        this.email = email;
+        this.office = office;
+        this.createdOn = LocalDate.now();
+    }
+    
     public String getFullName() {
         return fullName;
     }
