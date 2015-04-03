@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var module = angular.module('staffing', ['ngRoute', 'ngAutocomplete', 'staffing.services', 'staffing.controller']);
+	var module = angular.module('staffing', ['ngRoute', 'ngAutocomplete', 'staffing.services', 'staffing.controller', 'staffing.directives']);
 
 	module.config(function($routeProvider, $httpProvider) {
 
@@ -9,6 +9,8 @@
 			templateUrl: 'partials/home.html'
 		}).when('/login', {
 			templateUrl: 'partials/login.html'
+		}).when('/offices', {
+			templateUrl: 'partials/offices.html'
 		}).when('/employees', {
 			templateUrl: 'partials/employees.html',
 			controller: 'EmployeeCtrl',

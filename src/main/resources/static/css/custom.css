@@ -1,3 +1,15 @@
+#map {
+    height:600px;
+    width:100%;
+}
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+ 
+
 [ng\:cloak],[ng-cloak],.ng-cloak {
 	display: none !important;
 }
