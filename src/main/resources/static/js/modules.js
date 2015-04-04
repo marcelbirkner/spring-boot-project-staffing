@@ -9,8 +9,14 @@
 			templateUrl: 'partials/home.html'
 		}).when('/login', {
 			templateUrl: 'partials/login.html'
-		}).when('/offices', {
-			templateUrl: 'partials/offices.html'
+		}).when('/officesMap', {
+			templateUrl: 'partials/officesMap.html',
+			controller: 'MapCtrl',
+			resolve: {
+				locations: function(OfficeService) {
+					return OfficeService.getAllOfficesForMap();
+				}
+			}
 		}).when('/employees', {
 			templateUrl: 'partials/employees.html',
 			controller: 'EmployeeCtrl',
@@ -45,6 +51,14 @@
 			resolve: {
 				customer: function(CustomerService) {
 					return CustomerService.getAll();
+				}
+			}
+		}).when('/customerLocation', {
+			templateUrl: 'partials/customerLocation.html',
+			controller: 'MapCtrl',
+			resolve: {
+				locations: function(CustomerService) {
+					return CustomerService.getAllCustomerForMap();
 				}
 			}
 		}).otherwise('/');

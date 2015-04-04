@@ -1,11 +1,8 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li><a href="#/customer">Overview</a></li>
-        <li class="active"><a href="#/addCustomer">Add Customer</a></li>
-      </ul>
-    </div>
+    
+    <customer-navigation></customer-navigation>
+    
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <form name="customerForm" class="form-horizontal" role="form" ng-submit="ctrl.save()">
 

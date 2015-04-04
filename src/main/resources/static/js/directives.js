@@ -9,5 +9,11 @@
 	    templateUrl: 'partials/customerNavigation.html'
 	  };
   });
+  app.directive('employeeNavigation', function(){
+	  return {
+	    restrict: 'E',
+	    templateUrl: 'partials/employeeNavigation.html'
+	  };
+  });
   
 })();

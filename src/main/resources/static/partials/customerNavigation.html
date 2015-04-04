@@ -1,6 +1,7 @@
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
-    <li ng-class="active === 'customer' ? 'active' : ''"><a href="#/customer">Overview</a></li>
-    <li ng-class="active === 'addCustomer' ? 'active' : ''"><a href="#/addCustomer">Add Customer</a></li>
+    <li ng-class="{active: $location.path() == '/customer'}"><a href="#/customer">Overview</a></li>
+    <li ng-class="{active: $location.path() == '/addCustomer'}"><a href="#/addCustomer">Add Customer</a></li>
+    <li ng-class="{active: $location.path() == '/customerLocation'}"><a href="#/customerLocation">Customer Map</a></li>
   </ul>
 </div>

@@ -25,21 +25,39 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 	
+	/**
+	 * Init MongoDB with test data
+	 */
 	@PostConstruct
     public void initDb() {
 
-	    // create test data for MongoDB
         this.customerRepository.deleteAll();
         this.employeeRepository.deleteAll();
         
         GeoLocation geoLocation = new GeoLocation();
-        geoLocation.setLongitude("50.936872");
-        geoLocation.setLatitude("6.834235000000035");
-        this.customerRepository.save(new Customer("REWE", "Food", "Aachener Straße, Cologne, Germany"));
-        this.customerRepository.save(new Customer("Provinzial", "Insurance", "Provinzialplatz, Duesseldorf, Germany"));
+        geoLocation.setLatitude("50.936872");
+        geoLocation.setLongitude("6.834235000000035");
+        
+        Customer customerRewe = new Customer("REWE", "Food", "Aachener Straße, Cologne, Germany");
+        customerRewe.setGeoLocation(geoLocation);
+        this.customerRepository.save(customerRewe);
+        
+        Customer customerProvinzial = new Customer("Provinzial", "Insurance", "Provinzialplatz, Duesseldorf, Germany");
+        customerProvinzial.setGeoLocation(geoLocation);
+        this.customerRepository.save(customerProvinzial);
+
         for (int i = 0; i < 10; i++) {
-            this.customerRepository.save(new Customer("Customer #" + i, "General", "Test Street " + i + ", Metropolis, Planet Earth"));
-            this.employeeRepository.save(new Employee("John Doe #" + i, i + "-john.doe@email.com", "Solingen"));
+            Customer customerRandom = new Customer("Customer #" + i, "General", "Test Street " + i + ", Metropolis, Planet Earth");
+            geoLocation.setLatitude(Long.toString(50+i));
+            geoLocation.setLongitude(Long.toString(6-i));
+            customerRandom.setGeoLocation(geoLocation);
+            this.customerRepository.save(customerRandom);
+            
+            Employee employeeRandom = new Employee("John Doe #" + i, i + "-john.doe@email.com", "Solingen");
+            geoLocation.setLatitude(Long.toString(50-i));
+            geoLocation.setLongitude(Long.toString(6+i));
+            employeeRandom.setGeoLocation(geoLocation);
+            this.employeeRepository.save(employeeRandom);
         }
 
     }
