@@ -44,6 +44,21 @@
 			return customerList;
 		};
 		
+		this.searchCustomer = function(searchField) {
+			var params = { params: { customerName: searchField } };
+			console.log('Searching customer by name ' + searchField);
+			var customerList = $http.get('/api/customer/search/findByCustomerName', params)
+				.then(function(response) {
+					if (response.data._embedded) {
+						console.log('searchCustomer customer ' + response.data._embedded.customer.length);
+						return response.data._embedded.customer;
+					} else {
+						return [];
+					}
+				});
+			return customerList;
+		};
+		
 		this.getAllCustomerForMap = function() {
 			return $http.get('/api/customer')
 			.then(function(response) {

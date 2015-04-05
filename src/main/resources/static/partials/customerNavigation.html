@@ -3,5 +3,14 @@
     <li ng-class="{active: $location.path() == '/customer'}"><a href="#/customer">Overview</a></li>
     <li ng-class="{active: $location.path() == '/addCustomer'}"><a href="#/addCustomer">Add Customer</a></li>
     <li ng-class="{active: $location.path() == '/customerLocation'}"><a href="#/customerLocation">Customer Map</a></li>
+    <li class="nav-divider"></li>
   </ul>
+
+  <div class="input-group">
+    <input type="search" id="filter" ng-model="ctrl.search" class="form-control" placeholder="Search customer" />
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" ng-click="ctrl.searchCustomer(ctrl.search)">Go</button>
+    </span>
+  </div>
 </div>
+

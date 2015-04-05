@@ -21,11 +21,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="c in ctrl.customer" ng-animate=" 'animate' ">
+            <tr ng-animate=" 'animate' "ng-repeat="c in ctrl.customer | filter:ctrl.search" >
               <td>{{c.customerName}}</td>
               <td>{{c.industry}}</td>
               <td>{{c.address}}</td>
-              <td>{{c.createdOn | date:'short'}}</td>
+              <td>{{c.createdOn | date: 'short'}}</td>
               <td><button id="deleteButton" ng-click="ctrl.remove(c)" class="btn btn-danger">Delete</button></td>
             </tr>
           </tbody>

@@ -88,6 +88,34 @@
 	    watchEnter : true
 	  };
       
+      ctrl.initEmployees = function() {
+    	  var defaultEmployees = [ {
+	          "fullName" : "John",
+	          "email" : "john@codecentric.de",
+	          "office" : "Solingen",
+	          "address" : "Düsseldorf, Germany",
+	          "skills" : null,
+	          "projects" : null,
+	          "geoLocation" : {
+	            "longitude" : "51.2277411",
+	            "latitude" : "6.773455600000034"
+	          }
+	        }, {
+	          "fullName" : "Mike",
+	          "email" : "mike@codecentric.de",
+	          "office" : "Düsseldorf",
+	          "address" : "Ratingen, Germany",
+	          "skills" : null,
+	          "projects" : null,
+	          "geoLocation" : {
+	            "longitude" : "51.2964148",
+	            "latitude" : "6.840184399999998"
+	          }
+	        } ];
+    	  defaultEmployees.forEach(EmployeeService.add.bind(EmployeeService));
+          $route.reload();
+      };
+    	  
       ctrl.save = function() {
         console.log('save new employee ' + ctrl.newEmployee.fullName);
         
@@ -115,6 +143,7 @@
             $route.reload();
           });
       };
+      
     }
   ]);
 
@@ -124,7 +153,7 @@
 	$scope.$location = $location;
 
 	var ctrl = this;
-    ctrl.customer = customer;
+	ctrl.customer = customer;
     ctrl.newCustomer = {};
     
     $scope.errorMessage = '';
@@ -152,6 +181,12 @@
 	      });
       };
 
+      ctrl.searchCustomer = function(searchField) {
+          CustomerService.searchCustomer(searchField).then(function() {
+            $route.reload();
+          });
+        };
+        
     ctrl.remove = function(cust) {
       CustomerService.remove(cust).then(function() {
         $route.reload();

@@ -5,6 +5,8 @@
     
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h3>Employees</h3>
+      
+      <button id="initButton" type="submit" class="btn btn-primary" ng-show="{{ctrl.employees == 0}}" ng-click="ctrl.initEmployees()">Generate Employees</button>
 
       <div ng-show="authenticated">
         <table class="table">
