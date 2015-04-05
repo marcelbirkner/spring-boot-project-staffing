@@ -9,6 +9,15 @@
 			templateUrl: 'partials/home.html'
 		}).when('/login', {
 			templateUrl: 'partials/login.html'
+		}).when('/offices', {
+			templateUrl: 'partials/offices.html',
+			controller: 'OfficeCtrl',
+			controllerAs: 'ctrl',
+			resolve: {
+				offices: function(OfficeService) {
+					return OfficeService.getAll();
+				}
+			}
 		}).when('/officesMap', {
 			templateUrl: 'partials/officesMap.html',
 			controller: 'MapCtrl',

@@ -15,5 +15,11 @@
 	    templateUrl: 'partials/employeeNavigation.html'
 	  };
   });
+  app.directive('officeNavigation', function(){
+	  return {
+	    restrict: 'E',
+	    templateUrl: 'partials/officeNavigation.html'
+	  };
+  });
   
 })();

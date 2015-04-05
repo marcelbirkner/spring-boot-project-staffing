@@ -31,7 +31,7 @@
         </table>
       </div>
 
-      <div ng-hide="ctrl.employees" class="alert alert-info">
+      <div ng-show="{{ctrl.employees == 0}}" class="alert alert-info">
         <strong>Note! </strong>The Database is empty, sorry mate!
       </div>
 

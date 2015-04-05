@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+  
+    <office-navigation></office-navigation>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+      <h3>Offices</h3>
+      
+      <button id="initButton" type="submit" class="btn btn-primary" ng-show="{{ctrl.offices == 0}}" ng-click="ctrl.initOffices()">Generate Offices</button>
+      
+      <div ng-show="authenticated">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Office</th>
+              <th>Telephone</th>
+              <th>Address</th>
+              <th>Created On</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="o in ctrl.offices" ng-animate=" 'animate' ">
+              <td>{{o.office}}</td>
+              <td>{{o.telephone}}</td>
+              <td>{{o.address}}</td>
+              <td>{{o.createdOn | date:'short'}}</td>
+              <td><button id="deleteButton" ng-click="ctrl.remove(o)" class="btn btn-danger">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-show="{{ctrl.offices == 0}}" class="alert alert-info">
+        <strong>Note! </strong>The Database is empty, sorry mate!
+      </div>
+
+      <div ng-show="!authenticated">
+        <p>Login to see all offices</p>
+      </div>
+
+    </div>
+  </div>
+</div>

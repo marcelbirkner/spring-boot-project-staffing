@@ -6,6 +6,8 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
       <h3>Customer</h3>
+      
+      <button id="initButton" type="submit" class="btn btn-primary" ng-show="{{ctrl.customer == 0}}" ng-click="ctrl.initCustomer()">Generate Customer</button>
 
       <div ng-show="authenticated">
         <table class="table">
@@ -30,7 +32,7 @@
         </table>
       </div>
 
-      <div ng-hide="ctrl.customer" class="alert alert-info">
+      <div ng-show="{{ctrl.customer == 0}}" class="alert alert-info">
         <strong>Note! </strong>The Database is empty, sorry mate!
       </div>
 
