@@ -240,6 +240,43 @@
     	
     	var ctrl = this;
     	ctrl.offices = offices;
+    	ctrl.newOffice = {};
+        
+        $scope.errorMessage = '';
+        $scope.result = '';
+        $scope.options = {};
+        $scope.details = {};
+
+        ctrl.save = function() {
+            console.log('save office ' + ctrl.newOffice.office);
+            
+            if ( ! $scope.details.geometry ) {
+                $scope.errorMessage = 'Please check the address';
+                return;
+            }
+            
+    		var keys = Object.keys($scope.details.geometry.location);
+    		ctrl.newOffice.geoLocation = {};
+    		ctrl.newOffice.geoLocation.latitude = $scope.details.geometry.location[keys[0]];
+    		ctrl.newOffice.geoLocation.longitude = $scope.details.geometry.location[keys[1]];
+    		ctrl.newOffice.address = ctrl.address;
+    		
+    		OfficeService.add(ctrl.newOffice)
+    	      .then(function() {
+    	    	$route.reload();
+    	      });
+          };
+          
+      	ctrl.remove = function(office) {
+      		OfficeService.remove(office).then(function() {
+  	        $route.reload();
+  	      });
+  	    };
+  	    
+  	    ctrl.resetCustomer = function() {
+  	        console.log('resetOffice');
+  	        this.newOffice = {};
+  	      };
     	
     	ctrl.initOffices = function() {
     		
@@ -346,12 +383,7 @@
     		officeList.forEach(OfficeService.add.bind(OfficeService));
             $route.reload();
     	};
-    	
-    	ctrl.remove = function(office) {
-    		OfficeService.remove(office).then(function() {
-	        $route.reload();
-	      });
-	    };
+
     }]);
   
     module.controller('MapCtrl', function ($scope, $location, locations) {

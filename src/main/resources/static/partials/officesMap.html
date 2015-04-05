@@ -5,6 +5,7 @@
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
           <li ng-class="{active: $location.path() == '/offices'}"><a href="#/offices">Overview</a></li>
+          <li ng-class="{active: $location.path() == '/addOffice'}"><a href="#/addOffice">Add Office</a></li>
           <li ng-class="{active: $location.path() == '/officesMap'}"><a href="#/officesMap">Offices Map</a></li>
           <li class="nav-divider"></li>
           <li ng-repeat="marker in markers | orderBy : 'title'"><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></li>

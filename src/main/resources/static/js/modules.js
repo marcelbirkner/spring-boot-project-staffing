@@ -18,6 +18,15 @@
 					return OfficeService.getAll();
 				}
 			}
+		}).when('/addOffice', {
+			templateUrl: 'partials/addOffice.html',
+			controller: 'OfficeCtrl',
+			controllerAs: 'ctrl',
+			resolve: {
+				offices: function(OfficeService) {
+					return OfficeService.getAll();
+				}
+			}
 		}).when('/officesMap', {
 			templateUrl: 'partials/officesMap.html',
 			controller: 'MapCtrl',
