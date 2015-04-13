@@ -8,12 +8,21 @@
 		this.getAll = function() {
 			return $http.get('/api/employees')
 				.then(function(response) {
-					if (response.data._embedded) {
-						console.log('getAll employees ' + response.data._embedded.employee.length);
-						return response.data._embedded.employee;
-					} else {
-						return [];
-					}
+						return response.data;
+				});
+		};
+		
+		this.next = function(page, pageSize) {
+			if( ! page ) {
+				page = 0;
+			}
+			if( ! pageSize ) {
+				pageSize = 20;
+			}
+			console.log('GET /api/employees?page='+page+'&size='+pageSize);
+			return $http.get('/api/employees?page='+page+'&size='+pageSize)
+				.then(function(response) {
+						return response.data;
 				});
 		};
 

@@ -68,15 +68,19 @@
     }
   ]);
 
-  module.controller('EmployeeCtrl', ['$scope', '$http', '$route', '$location', 'employees',
+  module.controller('EmployeeCtrl', ['$scope', '$http', '$route', '$location', '$routeParams', 'employees',
     'EmployeeService',
-    function EmployeeCtrl($scope, $http, $route, $location, employees, EmployeeService) {
+    function EmployeeCtrl($scope, $http, $route, $location, $routeParams, employees, EmployeeService) {
 	  
 	  $scope.$location = $location;
 	  
       var ctrl = this;
-      ctrl.employees = employees;
       ctrl.newEmployee = {};
+      if ( employees._embedded ) {
+    	  ctrl.employees = employees._embedded.employee;
+      }
+      ctrl.links = employees._links;
+      ctrl.page = employees.page;
       
       $scope.errorMessage = '';
       $scope.result = '';
@@ -112,7 +116,15 @@
 	            "latitude" : "6.840184399999998"
 	          }
 	        } ];
+    	  for (var i = 0; i < 40; i++) {
+    		  var newEmployee = angular.copy(defaultEmployees[0]);
+    		  newEmployee.fullName = 'Tim ' + i;
+    		  newEmployee.email = 'tim-' + i + '@codecentric.de',
+    		  console.log(JSON.stringify(newEmployee));
+    		  defaultEmployees.push(newEmployee);
+    		}
     	  defaultEmployees.forEach(EmployeeService.add.bind(EmployeeService));
+    	  
           $route.reload();
       };
     	  

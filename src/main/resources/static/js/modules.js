@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var module = angular.module('staffing', ['ngRoute', 'ngAutocomplete', 'staffing.services', 'staffing.controller', 'staffing.directives']);
+	var module = angular.module('staffing', ['ngRoute', 'ngAutocomplete', 'staffing.services', 'staffing.controller', 'staffing.directives', 'staffing.filter']);
 
 	module.config(function($routeProvider, $httpProvider) {
 
@@ -40,8 +40,9 @@
 			controller: 'EmployeeCtrl',
 			controllerAs: 'ctrl',
 			resolve: {
-				employees: function(EmployeeService) {
-					return EmployeeService.getAll();
+				employees: function(EmployeeService, $location) {
+					console.log($location.search());
+					return EmployeeService.next($location.search().page, $location.search().pageSize);
 				}
 			}
 		}).when('/addEmployee', {

@@ -1,12 +1,18 @@
 <div class="container-fluid">
   <div class="row">
-    
+
     <employee-navigation></employee-navigation>
-    
+
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h3>Employees</h3>
-      
-      <button id="initButton" type="submit" class="btn btn-primary" ng-show="{{ctrl.employees == 0}}" ng-click="ctrl.initEmployees()">Generate Employees</button>
+
+      <button id="initButton" type="submit" class="btn btn-primary" ng-show="{{ctrl.page.totalElements == 0}}" ng-click="ctrl.initEmployees()">Generate Employees</button>
+
+      <ul class="pager">
+        <li ng-show="{{ctrl.links.prev}}"><a href="#/employees{{ctrl.links.prev.href | filterQueryString}}">Previous</a></li>
+        <li>Current Page: {{ ctrl.page.number + 1 }}, Page Size: {{ctrl.page.size}}, Total elements: {{ctrl.page.totalElements}} </li>
+        <li ng-show="{{ctrl.links.next}}"><a href="#/employees{{ctrl.links.next.href | filterQueryString}}">Next</a></li>
+      </ul>
 
       <div ng-show="authenticated">
         <table class="table">
