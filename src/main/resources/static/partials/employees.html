@@ -17,9 +17,9 @@
       <div ng-show="authenticated">
         
         <ul class="pager">
-          <li ng-show="{{ctrl.links.prev}}"><a href="#/employees{{ctrl.links.prev.href | filterQueryString}}">Previous</a></li>
+          <li ng-show="{{ctrl.links.prev}}"><a href="#/employees{{ctrl.links.prev.href | routify }}">Previous</a></li>
           <li ng-show="{{ctrl.page}}">Current Page: {{ ctrl.page.number + 1 }}, Page Size: {{ctrl.page.size}}, Total elements: {{ctrl.page.totalElements}} </li>
-          <li ng-show="{{ctrl.links.next}}"><a href="#/employees{{ctrl.links.next.href | filterQueryString}}">Next</a></li>
+          <li ng-show="{{ctrl.links.next}}"><a href="#/employees{{ctrl.links.next.href | routify }}">Next</a></li>
         </ul>
         
         <table class="table">
