@@ -4,17 +4,24 @@
     <employee-navigation></employee-navigation>
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h3>Employees</h3>
 
       <button id="initButton" type="submit" class="btn btn-primary" ng-show="{{ctrl.page.totalElements == 0}}" ng-click="ctrl.initEmployees()">Generate Employees</button>
-
-      <ul class="pager">
-        <li ng-show="{{ctrl.links.prev}}"><a href="#/employees{{ctrl.links.prev.href | filterQueryString}}">Previous</a></li>
-        <li>Current Page: {{ ctrl.page.number + 1 }}, Page Size: {{ctrl.page.size}}, Total elements: {{ctrl.page.totalElements}} </li>
-        <li ng-show="{{ctrl.links.next}}"><a href="#/employees{{ctrl.links.next.href | filterQueryString}}">Next</a></li>
-      </ul>
+  
+      <div class="input-group">
+        <input type="search" id="filter" ng-model="ctrl.search" class="form-control" placeholder="Search employee" required/>
+        <span class="input-group-btn">
+          <a class="btn btn-default" href="#/employees/search/findByFullName?fullName={{ctrl.search}}">Search</a>
+        </span>
+      </div>
 
       <div ng-show="authenticated">
+        
+        <ul class="pager">
+          <li ng-show="{{ctrl.links.prev}}"><a href="#/employees{{ctrl.links.prev.href | filterQueryString}}">Previous</a></li>
+          <li ng-show="{{ctrl.page}}">Current Page: {{ ctrl.page.number + 1 }}, Page Size: {{ctrl.page.size}}, Total elements: {{ctrl.page.totalElements}} </li>
+          <li ng-show="{{ctrl.links.next}}"><a href="#/employees{{ctrl.links.next.href | filterQueryString}}">Next</a></li>
+        </ul>
+        
         <table class="table">
           <thead>
             <tr>
@@ -27,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="employee in ctrl.employees" ng-animate=" 'animate' ">
+            <tr ng-repeat="employee in ctrl.employees | filter:ctrl.search" ng-animate=" 'animate' ">
               <td>{{employee.fullName}}</td>
               <td>{{employee.email}}</td>
               <td>{{employee.office}}</td>
