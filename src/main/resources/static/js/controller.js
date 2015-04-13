@@ -116,9 +116,9 @@
 	            "latitude" : "6.840184399999998"
 	          }
 	        } ];
-    	  for (var i = 0; i < 40; i++) {
+    	  for (var i = 0; i < 22; i++) {
     		  var newEmployee = angular.copy(defaultEmployees[0]);
-    		  newEmployee.fullName = 'Tim ' + i;
+    		  newEmployee.fullName = 'Tim';
     		  newEmployee.email = 'tim-' + i + '@codecentric.de',
     		  console.log(JSON.stringify(newEmployee));
     		  defaultEmployees.push(newEmployee);

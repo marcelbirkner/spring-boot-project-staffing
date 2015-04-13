@@ -45,6 +45,16 @@
 					return EmployeeService.next($location.search().page, $location.search().pageSize);
 				}
 			}
+		}).when('/employees/search/findByFullName', {
+			templateUrl: 'partials/employees.html',
+			controller: 'EmployeeCtrl',
+			controllerAs: 'ctrl',
+			resolve: {
+				employees: function(EmployeeService, $location) {
+					console.log($location.search());
+					return EmployeeService.findByFullName($location.search().fullName);
+				}
+			}
 		}).when('/addEmployee', {
 			templateUrl: 'partials/addEmployee.html',
 			controller: 'EmployeeCtrl',
